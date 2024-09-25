@@ -4,8 +4,8 @@ import java.time.temporal.ChronoUnit; // importei essa biblioteca com ajuda de I
 public class produtovalidade {
     public static void main(String[] args) throws Exception {
 
-        Produto p1 = new Produto("Bolacha", 3.0, 6.0, LocalDate.of(2022, 02, 25), LocalDate.of(2024, 10, 20));
-        Produto p2 = new Produto("Biscoito", 5.0, 8.0, LocalDate.of(2023, 05, 1), LocalDate.of(2023, 12, 30));
+        Produto p1 = new Produto("Bolacha", 3.0, 6.0, LocalDate.of(2022, 02, 25), LocalDate.of(2022, 03, 25));
+        Produto p2 = new Produto("Biscoito", 5.0, 8.0, LocalDate.of(2023, 05, 1), LocalDate.of(2023, 06, 1));
 
         System.out.println(p1);
         System.out.println(p2);
