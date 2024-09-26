@@ -1,5 +1,5 @@
-import java.time.LocalDate; //importar biblioteca para datas
-import java.time.temporal.ChronoUnit; // importei essa biblioteca com ajuda de IA :(
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class produtovalidade {
     public static void main(String[] args) throws Exception {
@@ -9,39 +9,49 @@ public class produtovalidade {
 
         System.out.println(p1);
         System.out.println(p2);
+
+        // Exemplo de produto sem especificar a validade (automaticamente calculada)
+        Produto p3 = new Produto("Chocolate", 10.0);
+        System.out.println(p3);
+
+        // Verificar se algum produto está vencido
+        System.out.println("Produto " + p1.getNome() + " venceu? " + p1.isVencido());
+        System.out.println("Produto " + p2.getNome() + " venceu? " + p2.isVencido());
+        System.out.println("Produto " + p3.getNome() + " venceu? " + p3.isVencido());
     }
 }
 
-    class Produto {
+class Produto {
 
-    //Construtor para receber os atributos
     private String nome;
     private double precoCusto, precoVenda;
     private LocalDate fabricacao, validade;
 
-    public String getNome()  {
+    // Getters
+    public String getNome() {
         return nome;
     }
 
     public double getPrecoVenda() {
         return precoVenda;
     }
-    
-    public LocalDate getValidade () {
+
+    public LocalDate getValidade() {
         return validade;
     }
 
+    // Sobrescrevendo toString para exibir melhor
     @Override
     public String toString() {
         return "Produto{" +
-        "nome ='" + nome + '\'' +
-        ", precoVenda = " + precoVenda +
-        ", validade = " + validade +
-        '}';
+                "nome='" + nome + '\'' +
+                ", precoVenda=" + precoVenda +
+                ", validade=" + validade +
+                (isVencido() ? " (Produto VENCIDO)" : " (Produto dentro da validade)") +
+                '}';
+    }
 
-    } 
-
-    //Construtor que calcula a validade com base na fabricação
+    // Construtor para relacionar tudo
     public Produto(String nome, double precoCusto, double precoVenda, LocalDate fabricacao, LocalDate validade) {
         this.nome = nome;
         this.precoCusto = precoCusto;
@@ -50,16 +60,16 @@ public class produtovalidade {
         this.validade = validade;
     }
 
-    //Metodo para calcular preço da venda e data de validade
+    // Construtor para calcula a validade com base na fabricação
     public Produto(String nome, double precoCusto) {
         this.nome = nome;
         this.precoCusto = precoCusto;
-        this.precoVenda = precoCusto * 1.1;
+        this.precoVenda = precoCusto * 1.1; // Exemplo de margem de 10%
         this.fabricacao = LocalDate.now();
         this.validade = fabricacao.plus(1, ChronoUnit.MONTHS);
     }
 
-    //Metodo para verificação do produdo vencido
+    // Verificar se o produto está vencido
     public boolean isVencido() {
         return LocalDate.now().isAfter(validade);
     }
